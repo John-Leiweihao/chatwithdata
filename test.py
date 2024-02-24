@@ -3,8 +3,7 @@ from llama_index.core import GPTVectorStoreIndex, ServiceContext, Document ,Simp
 import os
 import openai
 from llama_index.llms.openai import OpenAI
-os.environ['OPENAI_API_KEY']=st.secrets["OPENAI_API_KEY"]
-openai.api_key =os.environ['OPENAI_API_KEY']
+openai.api_key = st.secrets.openai_key
 api_base = "https://one.aiskt.com/v1"
 openai.base_url=api_base
 
