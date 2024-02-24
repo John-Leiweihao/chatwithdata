@@ -30,13 +30,24 @@ for message in st.session_state.messages: # Display the prior chat messages
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-if prompt := st.chat_input("Your question"): # Prompt for user input and save to chat history
+if prompt := st.chat_input("Your question"):  # Prompt for user input and save to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-    with st.chat_message("assistant"):
-         response = chat_engine.chat(prompt)
-         st.write(response.response)
-         st.image('buck-boost电路.jfif')
-         message = {"role": "assistant", "content": response.response}
-         st.session_state.messages.append(message) # Add response to message history
+
+    # 检查用户输入是否包含"拓扑图"
+    if "拓扑图" in prompt:
+        with st.chat_message("assistant"):
+            response = chat_engine.chat(prompt)
+            st.write(response.response)
+            st.image('buck-boost电路.jfif')  # 假设这是与“拓扑图”相关的图片
+            message = {"role": "assistant", "content": response.response}
+            st.session_state.messages.append(message)
+    else:
+        with st.chat_message("assistant"):
+            # 如果用户输入不包含"拓扑图"，执行其他回答或操作
+            response = chat_engine.chat(prompt)
+            st.write(response.response)
+            # 可以在这里添加其他处理逻辑
+            message = {"role": "assistant", "content": response.response}
+            st.session_state.messages.append(message)
