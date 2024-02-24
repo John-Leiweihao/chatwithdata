@@ -37,5 +37,6 @@ if prompt := st.chat_input("Your question"): # Prompt for user input and save to
     with st.chat_message("assistant"):
          response = chat_engine.chat(prompt)
          st.write(response.response)
+         st.image('buck-boost电路.jfif')
          message = {"role": "assistant", "content": response.response}
          st.session_state.messages.append(message) # Add response to message history
